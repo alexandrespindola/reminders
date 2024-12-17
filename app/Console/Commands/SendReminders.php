@@ -36,20 +36,9 @@ class SendReminders extends Command
             ->get();
 
         foreach ($reminders as $reminder) {
-            $this->sendNotification($reminder);
-            // $this->sendWhatsAppNotification($reminder);
-            $reminder->update(['status' => 'sent']);
-        }
-    }
-
-    private function sendNotification($reminder)
-    {
-        if ($reminder->notification_type == 'email' || $reminder->notification_type == 'both') {
             $this->sendEmailNotification($reminder);
-        }
-
-        if ($reminder->notification_type == 'whatsapp' || $reminder->notification_type == 'both') {
             $this->sendWhatsAppNotification($reminder);
+            $reminder->update(['status' => 'sent']);
         }
     }
 
