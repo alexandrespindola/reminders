@@ -1,7 +1,6 @@
 <x-app-layout>
 
     <h1>Criar Novo Reminder</h1>
-
     <form action="{{ route('reminders.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -25,8 +24,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="contact_info">Informação de Contato</label>
-            <input type="text" name="contact_info" id="contact_info" class="form-control" required>
+            <label for="email_recipient">E-mail recipient:</label>
+            <input type="text" name="email_recipient" id="email_recipient" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="whatsapp_recipient">WhatsApp recipient:</label>
+            <input type="text" name="whatsapp_recipient" id="whatsapp_recipient" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Criar Reminder</button>
     </form>

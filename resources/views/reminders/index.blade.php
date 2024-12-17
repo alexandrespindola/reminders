@@ -8,6 +8,7 @@
                 <th>Data/Hora</th>
                 <th>Status</th>
                 <th>Ações</th>
+                <th>Tipo</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
                             <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
                         </form>
                     </td>
+                    <td>{{ $reminder->notification_type }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -34,7 +34,8 @@ class ReminderController extends Controller
             'description' => 'nullable',
             'reminder_time' => 'required|date',
             'notification_type' => 'required|in:email,whatsapp,both',
-            'contact_info' => 'required',
+            'email_recipient' => 'required|email',
+            'whatsapp_recipient' => 'required',
         ]);
 
         Reminder::create($validated);

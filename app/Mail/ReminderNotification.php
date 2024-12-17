@@ -21,6 +21,7 @@ class ReminderNotification extends Mailable
     public function build()
     {
         return $this->from('notification@mail.titansdev.es')
+            ->to($this->reminder->email_recipient)
             ->subject('Lembrete: ' . $this->reminder->title)
             ->view('emails.reminder');
     }

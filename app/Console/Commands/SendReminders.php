@@ -37,7 +37,7 @@ class SendReminders extends Command
 
         foreach ($reminders as $reminder) {
             $this->sendNotification($reminder);
-            $this->sendWhatsAppNotification($reminder);
+            // $this->sendWhatsAppNotification($reminder);
             $reminder->update(['status' => 'sent']);
         }
     }
@@ -66,7 +66,7 @@ class SendReminders extends Command
 
         $data = [
             'title' => $reminder->title,
-            'contact_info' => $reminder->contact_info,
+            'whatsapp_recipient' => $reminder->whatsapp_recipient,
         ];
 
         $response = Http::post($webhookUrl, $data);
