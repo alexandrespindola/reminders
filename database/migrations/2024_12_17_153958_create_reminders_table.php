@@ -18,7 +18,8 @@ return new class extends Migration
         $table->dateTime('reminder_time');
         $table->enum('status', ['pending', 'sent', 'cancelled'])->default('pending');
         $table->enum('notification_type', ['email', 'whatsapp', 'both'])->default('email');
-        $table->string('contact_info');
+        $table->string('email_recipient');
+        $table->string('whatsapp_recipient');
         $table->timestamps();
     });
 }
