@@ -36,8 +36,18 @@ class SendReminders extends Command
             ->get();
 
         foreach ($reminders as $reminder) {
+
             $this->sendEmailNotification($reminder);
-            $this->sendWhatsAppNotification($reminder);
+
+            try {
+                $this->sendWhatsAppNotification($reminder);
+            } catch (\Exception $e) {
+                Log::error('Error sending WhatsApp notification', [
+                    'reminder_id' => $reminder->id,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+
             $reminder->update(['status' => 'sent']);
         }
     }
