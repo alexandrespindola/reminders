@@ -36,7 +36,7 @@ class SendReminders extends Command
             ->get();
 
         foreach ($reminders as $reminder) {
-            $this->sendEmailNotification($reminder);
+            // $this->sendEmailNotification($reminder);
             $this->sendWhatsAppNotification($reminder);
             $reminder->update(['status' => 'sent']);
         }
