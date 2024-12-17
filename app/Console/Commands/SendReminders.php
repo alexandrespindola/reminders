@@ -7,6 +7,7 @@ use App\Models\Reminder;
 use App\Mail\ReminderNotification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class SendReminders extends Command
 {
@@ -36,6 +37,7 @@ class SendReminders extends Command
 
         foreach ($reminders as $reminder) {
             $this->sendNotification($reminder);
+            $this->sendWebhook($reminder);
             $reminder->update(['status' => 'sent']);
         }
     }
@@ -60,10 +62,22 @@ class SendReminders extends Command
 
     private function sendWhatsAppNotification($reminder)
     {
-        Http::post('N8N_WEBHOOK_URL', [
+        $webhookUrl = env('N8N_WEBHOOK_URL');
+
+        $data = [
             'title' => $reminder->title,
-            'description' => $reminder->description,
-            'contact' => $reminder->contact_info
+            'contact_info' => $reminder->contact_info,
+        ];
+
+        $response = Http::post($webhookUrl, $data);
+
+        // Log da resposta
+        Log::info('Webhook sent', [
+            'url' => $webhookUrl,
+            'data' => $data,
+            'response_body' => $response->body(),
+            'response_status' => $response->status(),
         ]);
     }
+
 }
