@@ -37,7 +37,7 @@ class SendReminders extends Command
 
         foreach ($reminders as $reminder) {
             $this->sendNotification($reminder);
-            $this->sendWebhook($reminder);
+            $this->sendWhatsAppNotification($reminder);
             $reminder->update(['status' => 'sent']);
         }
     }
