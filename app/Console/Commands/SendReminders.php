@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Reminder;
+use App\Mail\ReminderNotification;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
 
 class SendReminders extends Command
 {

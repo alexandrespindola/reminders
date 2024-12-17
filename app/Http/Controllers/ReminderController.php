@@ -32,7 +32,7 @@ class ReminderController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable',
-            'reminder_time' => 'required|date|future',
+            'reminder_time' => 'required|date|after:now',
             'notification_type' => 'required|in:email,whatsapp,both',
             'contact_info' => 'required',
         ]);
