@@ -47,9 +47,14 @@ new class extends Component {
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-row justify-between space-x-1 items">
-                        <p class='self-center text-xs'>Recipient: <span class="font-semibold">{{ $reminder->email_recipient }}
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-col justify-start gap-y-1">
+                            <p class='text-xs'>Status: <span
+                                    class="font-semibold">{{ Str::ucfirst($reminder->status) }}</span></p>
                             </span></p>
+                            <p class='text-xs'>Recipient: <span class="font-semibold">{{ $reminder->email_recipient }}
+                                </span></p>
+                        </div>
                         <div class='flex flex-row justify-end gap-x-2'>
                             <x-mini-button rounded slate icon="eye" href="{{ route('reminders.edit', $reminder) }}"
                                 wire:navigate></x-mini-button>
@@ -57,6 +62,7 @@ new class extends Component {
                                 icon="trash"></x-mini-button>
                         </div>
                     </div>
+
                 </x-card>
             @endforeach
         </div>
