@@ -13,6 +13,16 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::resource('reminders', ReminderController::class);
+Route::view('reminders', 'reminders.index')
+    ->middleware(['auth'])
+    ->name('reminders.index');
+
+Route::view('reminders/create', 'reminders.create')
+    ->middleware(['auth'])
+    ->name('reminders.create');
+
+
+/* Route::resource('reminders', ReminderController::class)
+    ->middleware(['auth', 'verified']); */
 
 require __DIR__ . '/auth.php';

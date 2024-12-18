@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Reminder;
+use App\Models\User;
 
 class ReminderSeeder extends Seeder
 {
@@ -13,6 +14,12 @@ class ReminderSeeder extends Seeder
      */
     public function run(): void
     {
-        Reminder::factory()->count(10)->create();
+        User::all()->each(function (User $user) {
+            Reminder::factory()
+                ->count(10)
+                ->create([
+                    'user_id' => $user->id,
+                ]);
+        });
     }
 }

@@ -7,7 +7,6 @@ use App\Models\Reminder;
 use App\Mail\ReminderNotification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class SendReminders extends Command
 {
@@ -36,18 +35,8 @@ class SendReminders extends Command
             ->get();
 
         foreach ($reminders as $reminder) {
-
             $this->sendEmailNotification($reminder);
-
-            try {
-                $this->sendWhatsAppNotification($reminder);
-            } catch (\Exception $e) {
-                Log::error('Error sending WhatsApp notification', [
-                    'reminder_id' => $reminder->id,
-                    'error' => $e->getMessage(),
-                ]);
-            }
-
+            //$this->sendWhatsAppNotification($reminder);
             $reminder->update(['status' => 'sent']);
         }
     }
@@ -68,15 +57,6 @@ class SendReminders extends Command
             'whatsapp_recipient' => $reminder->whatsapp_recipient,
         ];
 
-        $response = Http::post($webhookUrl, $data);
-
-        // Log da resposta
-        Log::info('Webhook sent', [
-            'url' => $webhookUrl,
-            'data' => $data,
-            'response_body' => $response->body(),
-            'response_status' => $response->status(),
-        ]);
+        Http::post($webhookUrl, $data);
     }
-
 }

@@ -12,14 +12,15 @@ return new class extends Migration
     public function up()
 {
     Schema::create('reminders', function (Blueprint $table) {
-        $table->id();
+        $table->uuid('id')->primary();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->string('title');
         $table->text('description')->nullable();
         $table->dateTime('reminder_time');
         $table->enum('status', ['pending', 'sent', 'cancelled'])->default('pending');
         $table->enum('notification_type', ['email', 'whatsapp', 'both'])->default('email');
         $table->string('email_recipient');
-        $table->string('whatsapp_recipient');
+        $table->string('whatsapp_recipient')->nullable();
         $table->timestamps();
     });
 }

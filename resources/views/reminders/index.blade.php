@@ -1,4 +1,4 @@
-<x-app-layout>
+{{-- <x-app-layout>
     <h1>Reminders</h1>
     <a href="{{ route('reminders.create') }}" class="btn btn-primary">Criar Novo Reminder</a>
     <table class="table mt-3">
@@ -30,4 +30,22 @@
             @endforeach
         </tbody>
     </table>
+</x-app-layout>
+ --}}
+
+ <x-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+            {{ __('Notes') }}
+        </h2>
+    </x-slot>
+    <div class="py-12">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <livewire:reminders.show-reminders lazy/>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

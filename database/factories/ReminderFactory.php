@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Reminder;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReminderFactory extends Factory
@@ -12,6 +13,8 @@ class ReminderFactory extends Factory
     public function definition()
     {
         return [
+            'id' => $this->faker->uuid,
+            'user_id' => User::factory(),
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
             'reminder_time' => $this->faker->dateTimeBetween('now', '+1 month'),
