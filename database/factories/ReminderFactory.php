@@ -19,8 +19,8 @@ class ReminderFactory extends Factory
             'description' => $this->faker->paragraph(),
             'reminder_time' => $this->faker->dateTimeBetween('now', '+1 month'),
             'status' => $this->faker->randomElement(['pending', 'sent', 'cancelled']),
-            'notification_type' => $this->faker->randomElement(['email', 'whatsapp', 'both']),
-            'email_recipient' => $this->faker->email(),
+            'notification_type' => 'email',
+            'email_recipient' => 'alexandre.spindola11@gmail.com',
             'whatsapp_recipient' => $this->faker->phoneNumber(),
         ];
     }

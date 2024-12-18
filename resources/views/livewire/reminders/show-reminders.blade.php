@@ -35,8 +35,8 @@ new class extends Component {
             @foreach ($reminders as $reminder)
                 <x-card wire:key='card-{{ $reminder->id }}' class="flex flex-col flex-grow h-full">
                     <div class="flex justify-between flex-grow gap-4">
-                        <div class="pb-4">
-                            <p class="flex-grow text-xl font-bold">{{  $reminder->title }}</p>
+                        <div class="h-16 pb-4">
+                            <p class="flex-grow text-xl font-bold">{{ Str::limit($reminder->title, 40, '...') }}</p>
                         </div>
                         <div class="flex flex-col gap-y-0">
                             <div class='text-xs text-gray-500 whitespace-nowrap'>
@@ -48,9 +48,9 @@ new class extends Component {
                         </div>
                     </div>
                     <div class="flex flex-row justify-between space-x-1 items">
-                        <p class='text-xs'>Recipient: <span class="font-semibold">{{ $reminder->email_recipient }}
+                        <p class='self-center text-xs'>Recipient: <span class="font-semibold">{{ $reminder->email_recipient }}
                             </span></p>
-                        <div>
+                        <div class='flex flex-row justify-end gap-x-2'>
                             <x-mini-button rounded slate icon="eye" href="{{ route('reminders.edit', $reminder) }}"
                                 wire:navigate></x-mini-button>
                             <x-mini-button wire:click="delete('{{ $reminder->id }}')" rounded slate
