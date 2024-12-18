@@ -52,14 +52,14 @@ new #[Layout('layouts.app')] class extends Component {
     </h2>
 </x-slot>
 
-<div class="py-12">
+<div class="px-4 py-12 md:px-0">
     <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
         <form wire:submit="saveReminder" class="space-y-4">
             <x-input wire:model="reminderTitle" label="Reminder Title" placeholder="Remember to..." />
             <x-textarea wire:model="reminderDescription" label="Description (Optional)"
                 placeholder="Say something about your reminder..." />
             <x-select wire:model="reminderNotificationType" label="Select Reminder Type" placeholder="Select one"
-                :options="[['name' => 'E-mail', 'value' => 'email']]" option-label="name" option-value="value" @disabled(true) />
+                :options="[['name' => 'E-mail', 'value' => 'email']]" option-label="name" option-value="value" />
             <x-input wire:model="reminderEmailRecipient" label="E-mail Recipient" type="email"
                 placeholder="youremail@email.com" icon="user" />
             <x-datetime-picker wire:model.live="reminderReminderTime" label="Appointment Date"

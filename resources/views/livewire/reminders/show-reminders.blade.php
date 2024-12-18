@@ -31,7 +31,7 @@ new class extends Component {
     @else
         <x-button primary right-icon="plus" class="mt-6 mb-8" href="{{ route('reminders.create') }}" wire:navigate>Create
             reminder</x-button>
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             @foreach ($reminders as $reminder)
                 <x-card wire:key='card-{{ $reminder->id }}' class="flex flex-col flex-grow h-full">
                     <div class="flex justify-between flex-grow gap-4">
