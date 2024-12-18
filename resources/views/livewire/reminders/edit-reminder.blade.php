@@ -10,12 +10,10 @@ new #[Layout('layouts.app')] class extends Component {
     public $reminderTitle;
     public $reminderDescription;
     public $reminderReminderTime;
-    public $reminderStatus;
     public $reminderNotificationType;
     public $reminderEmailRecipient;
 
-
-    public function mount(reminder $reminder)
+    public function mount(Reminder $reminder)
     {
         $this->authorize('update', $reminder);
         $this->fill($reminder);
@@ -24,53 +22,53 @@ new #[Layout('layouts.app')] class extends Component {
         $this->reminderReminderTime = $reminder->reminder_time;
         $this->reminderNotificationType = $reminder->notification_type;
         $this->reminderEmailRecipient = $reminder->email_recipient;
-
     }
 
     public function saveReminder()
     {
         $validated = $this->validate([
-            'title' => 'required|max:255',
-            'description' => 'nullable',
-            'reminder_time' => 'required|date',
-            'notification_type' => 'required|in:email,whatsapp,both',
-            'email_recipient' => 'required|email',
+            'reminderTitle' => 'required|max:255',
+            'reminderDescription' => 'nullable',
+            'reminderReminderTime' => 'required|date',
+            'reminderNotificationType' => 'required|in:email,whatsapp,both',
+            'reminderEmailRecipient' => 'required|email',
         ]);
 
         $this->reminder->update([
-            'title' => $validated['title'],
-            'description' => $validated['description'],
-            'reminder_time' => $validated['reminder_time'],
-            'notification_type' => $validated['notification_type'],
-            'email_recipient' => $validated['email_recipient'],
+            'title' => $validated['reminderTitle'],
+            'description' => $validated['reminderDescription'],
+            'reminder_time' => $validated['reminderReminderTime'],
+            'notification_type' => $validated['reminderNotificationType'],
+            'email_recipient' => $validated['reminderEmailRecipient'],
         ]);
 
-        $this->dispatch('reminder-saved');
-
-        /* redirect(route('reminders.index')); */
+        $this->dispatch('note-saved');
     }
 }; ?>
 
 <x-slot name="header">
     <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        {{ __('reminders') }}
+        {{ __('Reminders') }}
     </h2>
 </x-slot>
+
 <div class="py-12">
     <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
         <form wire:submit="saveReminder" class="space-y-4">
-            <x-input wire:model="reminderTitle" label="reminder Title" placeholder="It's been a day." />
-            <x-textarea wire:model="reminderBody" label="Your reminder" placeholder="Share all your thoughts with your friends."
-                rows="12" />
-            <x-input wire:model="reminderRecipient" label="Recipient" type="email" placeholder="yourfriend@gmail.com"
-                icon="user" />
-            <x-input wire:model="remindersendDate" type="date" label="Send Date" icon="calendar" />
-            <x-checkbox label="reminder Published" wire:model="reminderIsPublished">Published</x-checkbox>
+            <x-input wire:model="reminderTitle" label="Reminder Title" placeholder="Remember to..." />
+            <x-textarea wire:model="reminderDescription" label="Description (Optional)"
+                placeholder="Say something about your reminder..." />
+            <x-select wire:model="reminderNotificationType" label="Select Reminder Type" placeholder="Select one"
+                :options="[['name' => 'E-mail', 'value' => 'email']]" option-label="name" option-value="value" @disabled(true) />
+            <x-input wire:model="reminderEmailRecipient" label="E-mail Recipient" type="email"
+                placeholder="youremail@email.com" icon="user" />
+            <x-datetime-picker wire:model.live="reminderReminderTime" label="Appointment Date"
+                placeholder="DD/MM/AAAA, HH:MM" />
             <div class="flex flex-row justify-between pt-2">
-                <x-button type="submit" spinner="savereminder">Save reminder</x-button>
-                <x-button href="{{ route('reminders.index') }}" flat secondary>Back to reminders</x-button>
+                <x-button type="submit" spinner="saveReminder">Save Reminder</x-button>
+                <x-button href="{{ route('reminders.index') }}" flat secondary>Back to Reminders</x-button>
             </div>
-            <x-action-message on="reminder-saved" />
+            <x-action-message on="note-saved" />
             <x-errors />
         </form>
     </div>
