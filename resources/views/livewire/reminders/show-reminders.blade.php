@@ -14,7 +14,7 @@ new class extends Component {
 
     public function delete($reminderId)
     {
-        $reminder = Reminder::where('id', $reminderId)->first();
+        $reminder = Reminder::findOrFail($reminderId);
         $this->authorize('delete', $reminder);
         $reminder->delete();
     }
