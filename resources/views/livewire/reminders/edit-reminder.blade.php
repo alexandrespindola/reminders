@@ -46,6 +46,8 @@ new #[Layout('layouts.app')] class extends Component {
     }
 }; ?>
 
+@section('title', 'Edit Reminder')
+
 <x-slot name="header">
     <h2 class="text-xl font-semibold leading-tight text-gray-800">
         {{ __('Reminders') }}

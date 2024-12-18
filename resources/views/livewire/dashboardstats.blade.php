@@ -17,6 +17,8 @@ new class extends Component {
     }
 }; ?>
 
+@section('title', 'Dashboard')
+
 <div>
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-2">
         <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
