@@ -10,9 +10,10 @@ class Reminder extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $guarded = [
-        'id',
-    ];
+    protected $guarded = ['id'];
+
+    protected $dates = ['deleted_at'];
+
 
     public function reminder()
     {
