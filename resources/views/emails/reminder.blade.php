@@ -7,7 +7,7 @@
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
     <div style="width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <div style="background-color: #4CAF50; color: #ffffff; padding: 10px 0; text-align: center;">
+        <div style="background-color: #FC2D2DFF; color: #ffffff; padding: 10px 0; text-align: center;">
             <h1 style="margin: 0;">Reminder</h1>
         </div>
         <div style="padding: 20px;">
